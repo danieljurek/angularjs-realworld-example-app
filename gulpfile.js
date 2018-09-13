@@ -63,7 +63,7 @@ gulp.task('build', ['html', 'browserify'], function() {
                  .pipe(gulp.dest('./dist/'));
 
   var js = gulp.src("build/main.js")
-               .pipe(uglify())
+               //.pipe(uglify())
                .pipe(gulp.dest('./dist/'));
 
   return merge(html,js);

@@ -18,6 +18,9 @@ import './auth';
 import './settings';
 import './editor';
 
+// Make the bundle artifically larger
+import 'lodash';
+
 
 // Create and bootstrap application
 const requires = [
