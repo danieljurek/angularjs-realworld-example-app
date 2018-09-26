@@ -52,6 +52,12 @@ gulp.task('css', function() {
     .pipe(gulp.dest('./build/css/'));
 });
 
+gulp.task('fonts', function() {
+  return gulp.src("src/fonts/*.woff2")
+    .on('error', interceptErrors)
+    .pipe(gulp.dest('./build/fonts/'));
+});
+
 gulp.task('views', function() {
   return gulp.src(viewFiles)
       .pipe(templateCache({
@@ -64,7 +70,7 @@ gulp.task('views', function() {
 
 // This task is used for building production ready
 // minified JS/CSS files into the dist/ folder
-gulp.task('build', ['html', 'css', 'browserify'], function() {
+gulp.task('build', ['html', 'css', 'browserify', 'fonts'], function() {
   var html = gulp.src("build/index.html")
                  .pipe(gulp.dest('./dist/'));
 
@@ -75,7 +81,10 @@ gulp.task('build', ['html', 'css', 'browserify'], function() {
   var css = gulp.src('build/css/*.css')
     .pipe(gulp.dest('./dist/css'));
 
-  return merge(html, js, css);
+  var fonts = gulp.src('build/fonts/*.woff2')
+    .pipe(gulp.dest('./dist/fonts'));
+
+  return merge(html, js, css, fonts);
 });
 
 gulp.task('default', ['html', 'browserify'], function() {
